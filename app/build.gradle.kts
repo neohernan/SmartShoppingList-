@@ -10,8 +10,8 @@ plugins {
 android {
     namespace = "com.r1n1os.jetpackcomposetemplateopensource"
     compileSdk = 36
-    buildToolsVersion = "36.0.0"
-    ndkVersion = "28.1.13356709"
+    buildToolsVersion = "36.1.0"
+    ndkVersion = "29.0.14206865"
 
     defaultConfig {
         applicationId = "com.r1n1os.jetpackcomposetemplateopensource"
