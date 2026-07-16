@@ -1,149 +1,191 @@
-# Jetpack-Compose-Template-Open-Source
+# Smart Shopping List
 
-Jetpack-Compose-Template-Open-Source is a production-ready Jetpack Compose Android project template following **Google's best practices** and implementing **Clean Architecture** out of the box. It was developed to save time and help developers kick-start new Android projects with the right structure and dependencies already in place. Just clone, rename, and build!
+**Smart Shopping List** es una aplicacion Android nativa que te ayuda a planificar tus compras de manera inteligente. Puedes buscar productos con precios simulados de multiples supermercados, escanear codigos de barras con la camara, y generar listas de compras automaticamente usando inteligencia artificial a partir de una simple descripcion en lenguaje natural.
 
-# 🚀 Android Starter Template
-## ✅ Features
-
-- Clean Architecture (Domain, Data, and Presentation layers)
-- MVVM (Model-View-ViewModel) architecture
-- Dependency Injection using **Hilt**
-- Coroutines for asynchronous programming
-- Retrofit for network calls
-- Room for local database
-- Material Design components (Including Expressive Material Design. You can remove the dependency if you plan to release the app before they become stable)
-- KSP
-- TYPE-save Navigation - Compose Navigation
-- Jetpack libraries and recommended tools
+> Desarrollada con **Kotlin** y **Jetpack Compose**, siguiendo **Arquitectura Limpia** y las mejores practicas de Android moderno.
 
 ---
 
-## 📦 Included Dependencies
+## Capturas de pantalla
 
-| Category              | Library                                                                 |
-|-----------------------|-------------------------------------------------------------------------|
-| Dependency Injection  | [Hilt](https://dagger.dev/hilt/), [Hilt Google Docs](https://developer.android.com/training/dependency-injection/hilt-android)                                       |
-| Networking            | [Retrofit](https://square.github.io/retrofit/)  |
-| Asynchronous Tasks    | [Kotlin Coroutines](https://kotlinlang.org/docs/coroutines-overview.html) [Coroutines Google Docs](https://developer.android.com/kotlin/coroutines) |
-| Database              | [Room](https://developer.android.com/jetpack/androidx/releases/room)    |
-| UI                    | [Material Components](https://material.io/components), [Jetpack ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel), [Expressive Material](https://m3.material.io/blog/building-with-m3-expressive), [Navigation Component](https://developer.android.com/guide/navigation) |
-| Other                 | [Serialization](https://kotlinlang.org/docs/serialization.html), [Core-KTX](https://developer.android.com/kotlin/ktx#core), [lifecycle Runtime KTX](https://developer.android.com/jetpack/androidx/releases/lifecycle), [KSP](https://kotlinlang.org/docs/ksp-quickstart.html) |
+| Pantalla | Vista previa |
+|---|---|
+| **Inicio** | `screenshots/home.png` |
+| **Busqueda** | `screenshots/search.png` |
+| **Escaner** | `screenshots/scanner.png` |
+| **Listas** | `screenshots/lists.png` |
+| **Generacion IA** | `screenshots/ai_generate.png` |
 
----
-
-## 🛠️ Project Configuration
-
-  * compileSdk: 36
-  * targetSdk: 36
-  * minSdk: 28
-  * buildToolsVersion: 36.1.0
-  * ndkVersion: 29.0.14206865
-  * gradle: 9.2.0
-  * kotlin: 2.2.21
-
----
-## 🧱 Project Structure
-<img width="575" height="843" alt="project_structure" src="https://github.com/user-attachments/assets/6a898561-8b1e-4fb5-9261-cf8516d03435" />
+> Agrega las capturas en la carpeta `screenshots/` y actualiza las rutas.
 
 ---
 
-## 📋 How to Use This Repository
+## Funcionalidades
 
-This repository can be used as a starting point for your Android projects in two ways:
-
----
-
-### ✅ Option 1: Use the “Use this template” Button (Recommended)
-
-If the repository is enabled as a template:
-
-1. Click the green **“Use this template”** button at the top-right of this repository page.
-2. Create a new repository with your own name, description, and visibility.
-3. Clone your new repository and start building — no extra steps needed!
-
-> This method gives you a clean copy without Git history and is the easiest way to start fresh.
+- **Busqueda de productos** — Consulta precios simulados en 4 supermercados: Coto, Disco, Vea y Carrefour.
+- **Escaner de codigo de barras** — Usa ML Kit (Google) para escanear productos directamente con la camara, sin conexion a internet.
+- **Generacion de listas con IA** — Describe lo que queres cocinar (ej: *"cena italiana para 4 personas"*) y la app genera automaticamente la lista de compras usando **OpenRouter**.
+- **Inicio personalizado** — Sugerencias predictivas basadas en tu historial de busqueda.
+- **Persistencia local** — Productos escaneados, listas e historial guardados con **Room** (SQLite).
+- **Navegacion inferior** — Interfaz limpia con Bottom Navigation (Inicio, Buscar, Escaner).
 
 ---
 
-### 🛠 Option 2: Clone the Repository Directly
+## Tecnologias y herramientas
 
-If you prefer to manually clone the repository:
+| Categoria | Tecnologia |
+|---|---|
+| **Lenguaje** | [Kotlin](https://kotlinlang.org/) |
+| **UI** | [Jetpack Compose](https://developer.android.com/jetpack/compose), Material 3 |
+| **Arquitectura** | MVVM + Clean Architecture |
+| **Inyeccion de dependencias** | [Hilt](https://dagger.dev/hilt/) |
+| **Base de datos local** | [Room](https://developer.android.com/training/data-storage/room) |
+| **Escaner de barras** | [ML Kit Barcode Scanning](https://developers.google.com/ml-kit/vision/barcode-scanning) |
+| **IA / LLM** | [OpenRouter API](https://openrouter.ai/) (modelo *meta-llama/llama-3.2-3b-instruct*) |
+| **Networking** | [OkHttp](https://square.github.io/okhttp/) |
+| **Serializacion JSON** | [Gson](https://github.com/google/gson) |
+| **CI/CD** | [GitHub Actions](https://github.com/features/actions) |
+| **Gradle** | Kotlin DSL + Version Catalog (`libs.versions.toml`) |
 
 ---
 
-#### 🔹 2.1. Clone the Repository Locally
+## Requisitos
 
-Click the green **“Code”** button on this page and choose one of the following methods:
+- **Android Studio** Hedgehog (2023.1.1) o superior
+- **JDK** 17+
+- **Android SDK** 36 (compileSdk), minSdk 28
+- **Gradle** 9.2.0
+- **Kotlin** 2.2.21
+- Dispositivo o emulador con **Android 9.0+** (API 28)
 
-##### 📥 Clone via HTTPS
+---
 
-```bash
-git clone https://github.com/r1n1os/Jetpack-Compose-Template-Open-Source.git
-```
-##### 🔐 Clone via SSH
+## Instalacion y ejecucion
 
-```bash
-git clone git@github.com:r1n1os/Jetpack-Compose-Template-Open-Source.git
-```
-
-##### 
-💻 Clone via GitHub CLI
+### 1. Clonar el repositorio
 
 ```bash
-gh repo clone r1n1os/Jetpack-Compose-Template-Open-Source
+git clone https://github.com/tu-usuario/smart-shopping-list.git
+cd smart-shopping-list/MiAppDeCompras
 ```
 
-Then navigate into the project directory:
+### 2. Configurar las claves API
+
+Crea o edita el archivo `local.properties` en la raiz del modulo `MiAppDeCompras/`:
+
+```properties
+sdk.dir=C\:\\Users\\tu-usuario\\AppData\\Local\\Android\\Sdk
+OPENROUTER_API_KEY=sk-or-v1-tu-clave-aqui
+```
+
+> Obten tu clave gratuita en [openrouter.ai/keys](https://openrouter.ai/keys).
+
+### 3. Compilar e instalar
 
 ```bash
-cd Jetpack-Compose-Template-Open-Source
+# En Windows (PowerShell)
+./gradlew clean installDebug
+
+# En macOS / Linux
+./gradlew clean installDebug
 ```
 
-#### 🔹 2.2. Remove the Existing Git History
+> Tambien podes abrir el proyecto en **Android Studio**, esperar que sincronice, y presionar **Run**.
 
-To disconnect from the original repository and avoid pushing to it:
+---
 
-##### On Windows (PowerShell):
+## Configuracion de claves API
 
-```bash
-Remove-Item -Recurse -Force .git
+### OpenRouter
+
+1. Registrate en [openrouter.ai](https://openrouter.ai/).
+2. Crea una API key en [openrouter.ai/keys](https://openrouter.ai/keys).
+3. Agregala al archivo `local.properties`:
+
+```properties
+OPENROUTER_API_KEY=sk-or-v1-tu-clave-real
 ```
 
-##### On Mac/Linux/Git Bash:
+4. Ejecuta **Build -> Clean Project -> Rebuild Project** para que se genere el `BuildConfig` con la clave.
 
-```bash
-rm -rf .git
+> **Importante:** No subas `local.properties` al repositorio. Ya esta incluido en `.gitignore`.
+
+---
+
+## Estructura del proyecto
+
+```
+MiAppDeCompras/
+├── app/
+│   ├── src/
+│   │   ├── main/
+│   │   │   ├── java/com/r1n1os/jetpackcomposetemplateopensource/
+│   │   │   │   ├── data/
+│   │   │   │   │   ├── local/           # Room DB, DAOs, entidades
+│   │   │   │   │   ├── mock/            # Datos mock de precios
+│   │   │   │   │   └── remote/          # GeminiAssistant (OpenRouter)
+│   │   │   │   ├── presentation/
+│   │   │   │   │   ├── screens/         # Composables (Home, Search, Scanner, etc.)
+│   │   │   │   │   ├── viewmodels/      # ViewModels (Home, CreateList, etc.)
+│   │   │   │   │   └── navigation/      # Configuracion de navegacion
+│   │   │   │   └── ui/theme/            # Tema, colores, tipografia
+│   │   │   └── res/                     # Recursos (drawables, strings, etc.)
+│   │   ├── test/                        # Tests unitarios
+│   │   └── androidTest/                 # Tests de instrumentacion
+│   └── build.gradle.kts
+├── gradle/
+│   └── libs.versions.toml               # Catalogo de versiones
+├── build.gradle.kts                     # Build raiz
+└── README.md
 ```
 
-#### 🔹 2.3. Initialize a New Git Repository
+---
 
-Now initialize your own Git project and connect it to your own GitHub repository:
+## Generacion de listas con IA
 
-```bash
-git init
-git remote add origin https://github.com/your-username/your-new-project.git
-git add .
-git commit -m "Initial commit from Android Starter Template"
-git push -u origin main
+La funcion de IA permite convertir descripciones en lenguaje natural en listas de compras estructuradas.
+
+**Ejemplos de uso:**
+- *"cena italiana para 4 personas"* -> `pasta, tomates, albahaca, queso parmesano, aceite de oliva, ajo`
+- *"desayuno saludable"* -> `avena, leche, bananas, miel, frutos secos`
+- *"comida mexicana para 2"* -> `tortillas, carne picada, frijoles, queso, jalapenos, crema agria`
+
+La app usa el modelo gratuito **`meta-llama/llama-3.2-3b-instruct`** a traves de la API de OpenRouter.
+
+---
+
+## Licencia
+
+```
+MIT License
+
+Copyright (c) 2026 Hernan
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 ```
 
-#### ✅ You now have your own version of the project, with full control and clean Git history.
+---
 
-## Contribution
+## Contribuciones
 
- If you have any feedback, found a bug or need something that is missing feel free to create an issue in the following link. https://github.com/r1n1os/Jetpack-Compose-Template-Open-Source/issues
+Las contribuciones son bienvenidas. Si encontras un bug o tenes una sugerencia, abri un [issue](https://github.com/tu-usuario/smart-shopping-list/issues) o envia un pull request.
 
+---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+<p align="center">Hecho con ❤️ usando Kotlin y Jetpack Compose</p>
