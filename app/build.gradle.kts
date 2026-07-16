@@ -1,3 +1,6 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -6,6 +9,15 @@ plugins {
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.kotlin.serialization)
 }
+
+val openrouterApiKey: String = try {
+    val props = Properties()
+    val localPropsFile = project.rootProject.file("local.properties")
+    if (localPropsFile.exists()) {
+        FileInputStream(localPropsFile).use { props.load(it) }
+        props.getProperty("OPENROUTER_API_KEY", "")
+    } else ""
+} catch (_: Exception) { "" }
 
 android {
     namespace = "com.r1n1os.jetpackcomposetemplateopensource"
@@ -21,6 +33,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "OPENROUTER_API_KEY", "\"$openrouterApiKey\"")
     }
 
     buildTypes {
@@ -43,6 +56,10 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
+    }
+    lint {
+        disable += "UnsafeOptInUsageError"
     }
 }
 
@@ -92,6 +109,21 @@ dependencies {
     ksp(libs.room.compiler)
     implementation(libs.room.ktx)
     /**
+     * CameraX
+     * */
+    implementation("androidx.camera:camera-core:1.4.1")
+    implementation("androidx.camera:camera-camera2:1.4.1")
+    implementation("androidx.camera:camera-lifecycle:1.4.1")
+    implementation("androidx.camera:camera-view:1.4.1")
+    /**
+     * ML Kit Barcode Scanning
+     * */
+    implementation("com.google.mlkit:barcode-scanning:17.3.0")
+    /**
+     * Gemini AI — REST API directa con OkHttp
+     * */
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    /**
      * Test
      * */
     testImplementation(libs.junit)
@@ -101,4 +133,6 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    implementation("androidx.compose.material:material-icons-extended:1.7.8")
 }
