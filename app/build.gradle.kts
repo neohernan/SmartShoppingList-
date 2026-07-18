@@ -144,37 +144,21 @@ dependencies {
 }
 
 kover {
-    exclude {
-        classes(
-            // BuildConfig generado automáticamente
-            "*.BuildConfig",
-            // Clases generadas por Hilt / Dagger
-            "*.Hilt_*",
-            "*._Factory",
-            "*._HiltInternal*",
-            "*.hilt.*",
-            "*.dagger.*",
-            "*.*_ComponentTreeDeps*",
-            "*.*_MembersInjector*",
-            "*.*_Provide*",
-            "*.*_Module*",
-            "*.*_Component*",
-            // Clases generadas por Dagger
-            "**/Dagger*",
-            // Clases de Hilt generadas internamente
-            "hilt_aggregated_deps.*",
-            "**/Hilt_*",
-            // DataBinding / ViewBinding
-            "*.databinding.*",
-            "*.BR.*",
-            // Room generated classes
-            "*.*_Impl*",
-            // Clases selladas de navegación generadas con KSP
-            "*.NavGraph*",
-            "*.NavRoutes*",
-            // Clases de prueba
-            "*.test.*",
-            "*.*Test*"
-        )
+    reports {
+        filters {
+            excludes {
+                classes(
+                    "*.BuildConfig",
+                    "*.Hilt_*",
+                    "*.Dagger*",
+                    "*.*_Impl",
+                    "*.com.r1n1os.jetpackcomposetemplateopensource.di.*"
+                )
+                packages(
+                    "com.r1n1os.jetpackcomposetemplateopensource.data.local.entity*",
+                    "com.r1n1os.jetpackcomposetemplateopensource.presentation.models*"
+                )
+            }
+        }
     }
 }
