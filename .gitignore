@@ -13,3 +13,6 @@
 .externalNativeBuild
 .cxx
 local.properties
+# Archivos de instrucciones y progreso (no subir al repo público)
+.github/instructions/
+PROGRESS.md
