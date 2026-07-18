@@ -142,3 +142,39 @@ dependencies {
 
     implementation("androidx.compose.material:material-icons-extended:1.7.8")
 }
+
+kover {
+    exclude {
+        classes(
+            // BuildConfig generado automáticamente
+            "*.BuildConfig",
+            // Clases generadas por Hilt / Dagger
+            "*.Hilt_*",
+            "*._Factory",
+            "*._HiltInternal*",
+            "*.hilt.*",
+            "*.dagger.*",
+            "*.*_ComponentTreeDeps*",
+            "*.*_MembersInjector*",
+            "*.*_Provide*",
+            "*.*_Module*",
+            "*.*_Component*",
+            // Clases generadas por Dagger
+            "**/Dagger*",
+            // Clases de Hilt generadas internamente
+            "hilt_aggregated_deps.*",
+            "**/Hilt_*",
+            // DataBinding / ViewBinding
+            "*.databinding.*",
+            "*.BR.*",
+            // Room generated classes
+            "*.*_Impl*",
+            // Clases selladas de navegación generadas con KSP
+            "*.NavGraph*",
+            "*.NavRoutes*",
+            // Clases de prueba
+            "*.test.*",
+            "*.*Test*"
+        )
+    }
+}
