@@ -8,7 +8,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.kover)
+    id("jacoco")
 }
 
 val openrouterApiKey: String = try {
@@ -64,6 +64,12 @@ android {
     }
     testOptions {
         unitTests.isReturnDefaultValues = true
+    }
+    buildTypes {
+        debug {
+            enableUnitTestCoverage = true
+            enableAndroidTestCoverage = true
+        }
     }
 }
 
@@ -143,22 +149,51 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended:1.7.8")
 }
 
-kover {
+// ──────────────────────────────────────────────────────────────
+// JaCoCo — Reportes de cobertura de código
+// ──────────────────────────────────────────────────────────────
+jacoco {
+    toolVersion = "0.8.12"
+}
+
+tasks.register("jacocoTestReport", JacocoReport::class) {
+    dependsOn("testDebugUnitTest")
+
     reports {
-        filters {
-            excludes {
-                classes(
-                    "*.BuildConfig",
-                    "*.Hilt_*",
-                    "*.Dagger*",
-                    "*.*_Impl",
-                    "*.com.r1n1os.jetpackcomposetemplateopensource.di.*"
-                )
-                packages(
-                    "com.r1n1os.jetpackcomposetemplateopensource.data.local.entity*",
-                    "com.r1n1os.jetpackcomposetemplateopensource.presentation.models*"
-                )
-            }
-        }
+        xml.required.set(true)
+        html.required.set(true)
     }
+
+    val fileFilter = listOf(
+        "**/R.class",
+        "**/R\$*.class",
+        "**/BuildConfig*",
+        "**/Manifest*",
+        "**/Hilt_*",
+        "**/Dagger*",
+        "**/*_Factory*",
+        "**/*_MembersInjector*",
+        "**/*_Provide*",
+        "**/*_Module*",
+        "**/*_Impl*",
+        "**/databinding/*",
+        "**/di/*",
+        "**/entity/*",
+        "**/models/*"
+    )
+
+    val debugKotlinTree = fileTree("${layout.buildDirectory.get()}/tmp/kotlin-classes/debug") {
+        exclude(fileFilter)
+    }
+
+    val mainSrc = "${project.projectDir}/src/main/java"
+
+    sourceDirectories.setFrom(files(mainSrc))
+    classDirectories.setFrom(files(debugKotlinTree))
+    executionData.setFrom(
+        fileTree(layout.buildDirectory.get()) {
+            include("outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec")
+            include("jacoco/testDebugUnitTest.exec")
+        }
+    )
 }

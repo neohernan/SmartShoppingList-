@@ -1,7 +1,7 @@
 # 🚀 CI/CD Pipeline — Smart Shopping List
 #
 # Ejecuta pruebas unitarias, pruebas instrumentadas en emulador,
-# y genera reportes de cobertura con Kover en cada push a main
+# y genera reportes de cobertura con JaCoCo en cada push a main
 # y en cada Pull Request.
 
 name: Android CI
@@ -21,7 +21,7 @@ jobs:
   # 1. Pruebas unitarias + cobertura
   # ═══════════════════════════════════════════════════════════════════
   unit-tests:
-    name: Unit Tests + Kover Coverage
+    name: Unit Tests + JaCoCo Coverage
     runs-on: ubuntu-latest
 
     steps:
@@ -43,8 +43,8 @@ jobs:
       - name: 🧪 Run unit tests
         run: ./gradlew testDebugUnitTest
 
-      - name: 📊 Generate Kover coverage report
-        run: ./gradlew koverXmlReport --stacktrace
+      - name: 📊 Generate JaCoCo coverage report
+        run: ./gradlew jacocoTestReport
 
       - name: 📤 Upload unit test report
         uses: actions/upload-artifact@v4
@@ -54,12 +54,12 @@ jobs:
           path: app/build/reports/tests/
           retention-days: 7
 
-      - name: 📤 Upload Kover coverage report
+      - name: 📤 Upload JaCoCo coverage report
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: kover-coverage-report
-          path: app/build/reports/kover/
+          name: jacoco-coverage-report
+          path: app/build/reports/jacoco/
           retention-days: 7
 
   # ═══════════════════════════════════════════════════════════════════
