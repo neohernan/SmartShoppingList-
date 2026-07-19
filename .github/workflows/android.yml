@@ -44,7 +44,7 @@ jobs:
         run: ./gradlew testDebugUnitTest
 
       - name: 📊 Generate Kover coverage report
-        run: ./gradlew koverReport --stacktrace
+        run: ./gradlew koverXmlReport --stacktrace
 
       - name: 📤 Upload unit test report
         uses: actions/upload-artifact@v4
