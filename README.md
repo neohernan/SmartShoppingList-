@@ -188,4 +188,4 @@ Las contribuciones son bienvenidas. Si encontras un bug o tenes una sugerencia, 
 
 ---
 
-<p align="center">Hecho con ❤️ usando Kotlin y Jetpack Compose</p>
+<p align="center">Hecho usando Kotlin y Jetpack Compose</p>
