@@ -13,6 +13,9 @@
 .externalNativeBuild
 .cxx
 local.properties
+*.keystore
+keystore.properties
 # Archivos de instrucciones y progreso (no subir al repo público)
 .github/instructions/
 PROGRESS.md
+informe_final.md
